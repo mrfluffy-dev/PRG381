@@ -40,7 +40,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(
+		http.authorizeRequests()
+				.antMatchers("/admin").hasRole("ADMIN")
+				.antMatchers(
 				 "/registration**",
 	                "/js/**",
 	                "/css/**",
@@ -57,6 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		.logoutSuccessUrl("/login?logout")
 		.permitAll();
+
 	}
 
 }
